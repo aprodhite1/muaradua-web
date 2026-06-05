@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin – Desa Pasar Muaradua</title>
+  <meta name="description" content="Dashboard admin Desa Pasar Muaradua untuk mengelola data desa dan infografis." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body { background: var(--bg-light); }
+
+    /* Admin Layout */
+    .admin-layout {
+      display: flex;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* Active Panel */
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; }
+
+    /* Panel Title */
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: var(--text-dark);
+    }
+    .panel-sub { font-size: 0.875rem; color: var(--text-light); margin-bottom: 1.5rem; }
+
+    /* Admin Content */
+    .admin-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-x: hidden;
+      max-width: calc(100vw - 240px);
+    }
+
+    /* Form Card */
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-card h4 { margin-bottom: 1rem; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* Inline form row */
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Table in Admin */
+    .admin-table-wrap {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .admin-table-wrap .table-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-table-wrap .table-header h4 { font-size: 0.95rem; margin: 0; }
+
+    /* Dashboard Welcome */
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #3a7bbf 100%);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .welcome-banner h2 { color: var(--white); font-size: 1.4rem; margin-bottom: 0.35rem; position: relative; }
+    .welcome-banner p  { color: rgba(255,255,255,0.85); font-size: 0.9rem; position: relative; }
+    .welcome-emoji { position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); font-size: 4rem; opacity: 0.2; }
+
+    /* Quick Nav Buttons */
+    .quick-nav { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .quick-nav-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem; font-weight: 600;
+      cursor: pointer;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+      transition: var(--transition);
+      font-family: var(--font);
+    }
+    .quick-nav-btn:hover, .quick-nav-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .admin-content { padding: 1rem; max-width: 100vw; }
+    }
+  </style>
+</head>
+<body class="admin-page">
+
+  <!-- Admin Top Bar -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-brand">
+      <span class="admin-topbar-icon">🏘️</span>
+      <div>
+        <div style="font-size:0.95rem;">Dashboard Admin</div>
+        <div style="font-size:0.75rem;opacity:0.7;font-weight:400;">Desa Pasar Muaradua · Kecamatan Muaradua</div>
+      </div>
+    </div>
+    <div class="admin-topbar-actions">
+      <a href="index.html" target="_blank">🌐 Lihat Website</a>
+      <div class="admin-user">
+        <div class="admin-avatar" id="adminAvatar">A</div>
+        <span id="adminName" style="font-size:0.85rem;"></span>
+      </div>
+      <a href="#" id="logoutBtn" style="color:rgba(255,120,120,0.9);">🚪 Keluar</a>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-title">Menu Utama</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active" onclick="showPanel('dashboard',this)"><span class="icon">🏠</span> Dashboard</a></li>
+      </ul>
+      <div class="sidebar-section-title">Data Desa</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" onclick="showPanel('data-penduduk',this)"><span class="icon">👥</span> Data Penduduk</a></li>
+        <li><a href="#" onclick="showPanel('data-pendidikan',this)"><span class="icon">📚</span> Data Pendidikan</a></li>
+        <li><a href="#" onclick="showPanel('data-ekonomi',this)"><span class="icon">💼</span> Data Ekonomi</a></li>
+        <li><a href="#" onclick="showPanel('data-kesehatan',this)"><span class="icon">🏥</span> Data Kesehatan</a></li>
+      </ul>
+      <div class="sidebar-section-title">Konten</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" onclick="showPanel('infografis',this)"><span class="icon">📈</span> Kelola Infografis</a></li>
+        <li><a href="#" onclick="showPanel('pengumuman',this)"><span class="icon">📢</span> Pengumuman</a></li>
+      </ul>
+      <div class="sidebar-section-title">Akun</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" onclick="showPanel('profil',this)"><span class="icon">⚙️</span> Profil Admin</a></li>
+        <li><a href="#" id="logoutBtn2"><span class="icon">🚪</span> Keluar</a></li>
+      </ul>
+    </aside>
+
+    <!-- Admin Content -->
+    <main class="admin-content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div id="panel-dashboard" class="admin-panel active animate-fade-in-up">
+        <div class="welcome-banner">
+          <div class="welcome-emoji">🏘️</div>
+          <h2>Selamat datang, <span id="adminNameBanner">Admin</span>! 👋</h2>
+          <p>Anda login sebagai admin Desa Pasar Muaradua. Kelola data desa dan infografis dari panel ini.</p>
+        </div>
+
+        <!-- Quick Nav -->
+        <div class="quick-nav">
+          <button class="quick-nav-btn" onclick="showPanel('data-penduduk',null)">👥 Data Penduduk</button>
+          <button class="quick-nav-btn" onclick="showPanel('infografis',null)">📈 Infografis</button>
+          <button class="quick-nav-btn" onclick="showPanel('pengumuman',null)">📢 Pengumuman</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid mb-4">
+          <div class="stat-card"><div class="stat-icon blue">👥</div><div class="stat-info"><h4>Total Penduduk</h4><div class="value" id="dashPenduduk">4.120</div><div class="sub">jiwa terdaftar</div></div></div>
+          <div class="stat-card"><div class="stat-icon orange">🏠</div><div class="stat-info"><h4>Kepala Keluarga</h4><div class="value">1.163</div><div class="sub">KK aktif</div></div></div>
+          <div class="stat-card"><div class="stat-icon green">📈</div><div class="stat-info"><h4>Infografis</h4><div class="value" id="dashInfografis">0</div><div class="sub">item dipublikasi</div></div></div>
+          <div class="stat-card"><div class="stat-icon red">📢</div><div class="stat-info"><h4>Pengumuman</h4><div class="value">5</div><div class="sub">pengumuman aktif</div></div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">📋 Aktivitas Terbaru</div>
+          <div class="card-body">
+            <table>
+              <thead><tr><th>Waktu</th><th>Kegiatan</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Hari ini</td><td>Login admin berhasil</td><td><span class="badge badge-green">✅ Berhasil</span></td></tr>
+                <tr><td>28 Apr</td><td>Update data penduduk RT 03</td><td><span class="badge badge-green">✅ Selesai</span></td></tr>
+                <tr><td>25 Apr</td><td>Tambah infografis pendidikan</td><td><span class="badge badge-primary">📌 Dipublikasi</span></td></tr>
+                <tr><td>20 Apr</td><td>Edit profil desa</td><td><span class="badge badge-green">✅ Selesai</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DATA PENDUDUK ===== -->
+      <div id="panel-data-penduduk" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">👥 Kelola Data Penduduk</div>
+        <div class="panel-sub">Tambah atau hapus data penduduk per RT/RW. Data disimpan secara lokal.</div>
+
+        <div id="dataAlert" class="alert alert-hidden"></div>
+
+        <div class="form-card">
+          <h4>➕ Tambah Data Penduduk</h4>
+          <form id="addPendudukForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>RT</label>
+                <input type="text" id="inputRT" placeholder="Contoh: RT 06" required />
+              </div>
+              <div class="form-group">
+                <label>RW</label>
+                <input type="text" id="inputRW" placeholder="Contoh: RW 04" required />
+              </div>
+              <div class="form-group">
+                <label>Laki-laki</label>
+                <input type="number" id="inputLaki" placeholder="0" min="0" required />
+              </div>
+              <div class="form-group">
+                <label>Perempuan</label>
+                <input type="number" id="inputPerempuan" placeholder="0" min="0" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">➕ Tambahkan Data</button>
+          </form>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="table-header">
+            <h4>📋 Tabel Data Penduduk per RT/RW</h4>
+            <span class="badge badge-primary">Data Aktif</span>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr><th>No</th><th>RT</th><th>RW</th><th>Laki-laki</th><th>Perempuan</th><th>Total</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="adminPendudukBody">
+                <tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-light)">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DATA PENDIDIKAN ===== -->
+      <div id="panel-data-pendidikan" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">📚 Data Pendidikan</div>
+        <div class="panel-sub">Kelola data tingkat pendidikan warga desa.</div>
+        <div class="card">
+          <div class="card-header">📋 Ringkasan Pendidikan</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Tingkat Pendidikan</th><th>Laki-laki</th><th>Perempuan</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td>Tidak/Belum Sekolah</td><td>142</td><td>158</td><td>300</td></tr>
+                <tr><td>Belum Tamat SD</td><td>210</td><td>195</td><td>405</td></tr>
+                <tr><td>Tamat SD/Sederajat</td><td>385</td><td>362</td><td>747</td></tr>
+                <tr><td>SMP/Sederajat</td><td>420</td><td>398</td><td>818</td></tr>
+                <tr><td>SMA/SMK/Sederajat</td><td>328</td><td>322</td><td>650</td></tr>
+                <tr><td>Diploma/Sarjana</td><td>167</td><td>158</td><td>325</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="alert alert-info mt-3">ℹ️ Fitur edit data pendidikan akan tersedia pada pembaruan berikutnya.</div>
+      </div>
+
+      <!-- ===== DATA EKONOMI ===== -->
+      <div id="panel-data-ekonomi" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">💼 Data Ekonomi</div>
+        <div class="panel-sub">Ringkasan data ekonomi dan mata pencaharian warga.</div>
+        <div class="card">
+          <div class="card-header">📋 Mata Pencaharian</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Mata Pencaharian</th><th>Jumlah</th><th>Persentase</th></tr></thead>
+              <tbody>
+                <tr><td>🌾 Petani / Buruh Tani</td><td>542</td><td>35,2%</td></tr>
+                <tr><td>🏪 Pedagang / Wiraswasta</td><td>218</td><td>14,2%</td></tr>
+                <tr><td>🏢 PNS / TNI / Polri</td><td>127</td><td>8,2%</td></tr>
+                <tr><td>🔧 Buruh Bangunan</td><td>195</td><td>12,7%</td></tr>
+                <tr><td>🚗 Jasa Transportasi</td><td>86</td><td>5,6%</td></tr>
+                <tr><td>📦 Lainnya</td><td>372</td><td>24,1%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="alert alert-info mt-3">ℹ️ Fitur edit data ekonomi akan tersedia pada pembaruan berikutnya.</div>
+      </div>
+
+      <!-- ===== DATA KESEHATAN ===== -->
+      <div id="panel-data-kesehatan" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">🏥 Data Kesehatan</div>
+        <div class="panel-sub">Ringkasan data kesehatan dan fasilitas kesehatan desa.</div>
+        <div class="stats-grid mb-3">
+          <div class="stat-card"><div class="stat-icon red">🏥</div><div class="stat-info"><h4>Posyandu Aktif</h4><div class="value">3</div></div></div>
+          <div class="stat-card"><div class="stat-icon blue">👶</div><div class="stat-info"><h4>Balita Sehat</h4><div class="value">312</div></div></div>
+          <div class="stat-card"><div class="stat-icon green">💉</div><div class="stat-info"><h4>Imunisasi</h4><div class="value">91,3%</div></div></div>
+        </div>
+        <div class="alert alert-info">ℹ️ Fitur edit data kesehatan akan tersedia pada pembaruan berikutnya.</div>
+      </div>
+
+      <!-- ===== INFOGRAFIS ===== -->
+      <div id="panel-infografis" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">📈 Kelola Infografis</div>
+        <div class="panel-sub">Tambah atau hapus infografis yang tampil di halaman publik desa.</div>
+
+        <div id="infAlert" class="alert alert-hidden"></div>
+
+        <div class="form-card">
+          <h4>➕ Tambah Infografis Baru</h4>
+          <form id="addInfografisForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Judul Infografis</label>
+                <input type="text" id="infJudul" placeholder="Judul infografis" required />
+              </div>
+              <div class="form-group">
+                <label>Kategori</label>
+                <select id="infKategori" required>
+                  <option value="">-- Pilih Kategori --</option>
+                  <option value="Kependudukan">Kependudukan</option>
+                  <option value="Pendidikan">Pendidikan</option>
+                  <option value="Ekonomi">Ekonomi</option>
+                  <option value="Kesehatan">Kesehatan</option>
+                  <option value="Infrastruktur">Infrastruktur</option>
+                  <option value="Pertanian">Pertanian</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Emoji / Ikon</label>
+                <input type="text" id="infEmoji" placeholder="Contoh: 📊" maxlength="4" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Deskripsi Singkat</label>
+              <textarea id="infDesc" placeholder="Deskripsi singkat infografis ini..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">➕ Tambah Infografis</button>
+          </form>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="table-header">
+            <h4>📋 Daftar Infografis</h4>
+            <a href="infografis.html" target="_blank" class="btn btn-outline" style="padding:0.3rem 0.9rem;font-size:0.8rem;">Lihat Publik →</a>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Ikon</th><th>Judul</th><th>Kategori</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
+              <tbody id="adminInfografisBody">
+                <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-light)">Belum ada infografis.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PENGUMUMAN ===== -->
+      <div id="panel-pengumuman" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">📢 Kelola Pengumuman</div>
+        <div class="panel-sub">Tambah dan kelola pengumuman yang tampil di beranda desa.</div>
+        <div class="alert alert-info">ℹ️ Fitur manajemen pengumuman akan tersedia pada pembaruan berikutnya.</div>
+        <div class="card mt-3">
+          <div class="card-header">📋 Pengumuman Aktif</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Tanggal</th><th>Judul</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>28 Apr 2025</td><td>Musyawarah Desa Rencana Pembangunan 2025</td><td><span class="badge badge-green">Aktif</span></td></tr>
+                <tr><td>20 Apr 2025</td><td>Pembagian Bantuan Pangan Non-Tunai</td><td><span class="badge badge-green">Aktif</span></td></tr>
+                <tr><td>15 Apr 2025</td><td>Jadwal Posyandu Balita Bulan Mei</td><td><span class="badge badge-green">Aktif</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PROFIL ADMIN ===== -->
+      <div id="panel-profil" class="admin-panel animate-fade-in-up">
+        <div class="panel-title">⚙️ Profil Admin</div>
+        <div class="panel-sub">Informasi akun admin yang sedang aktif.</div>
+        <div class="card" style="max-width:480px;">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;">
+              <div style="width:72px;height:72px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:2rem;color:white;font-weight:700;" id="profileAvatar">A</div>
+              <div>
+                <div style="font-size:1.1rem;font-weight:700;" id="profileName">Admin</div>
+                <div style="font-size:0.85rem;color:var(--text-light);">Administrator Desa Pasar Muaradua</div>
+              </div>
+            </div>
+            <div class="profile-item" style="background:var(--bg-section);border-radius:var(--radius-sm);padding:1rem;margin-bottom:0.75rem;">
+              <label style="font-size:0.75rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Desa</label>
+              <p style="font-size:0.95rem;font-weight:600;color:var(--text-dark);margin-top:0.25rem;">Pasar Muaradua</p>
+            </div>
+            <div class="profile-item" style="background:var(--bg-section);border-radius:var(--radius-sm);padding:1rem;margin-bottom:0.75rem;">
+              <label style="font-size:0.75rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Kecamatan</label>
+              <p style="font-size:0.95rem;font-weight:600;color:var(--text-dark);margin-top:0.25rem;">Muaradua, OKU Selatan</p>
+            </div>
+            <button onclick="document.getElementById('logoutBtn').click()" class="btn btn-primary mt-2" style="width:100%;justify-content:center;">🚪 Keluar dari Akun</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    function showPanel(id, el) {
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById('panel-' + id);
+      if (panel) panel.classList.add('active');
+      document.querySelectorAll('.admin-sidebar .sidebar-menu a').forEach(a => a.classList.remove('active'));
+      if (el) el.classList.add('active');
+      return false;
+    }
+
+    // Logout for sidebar btn
+    document.getElementById('logoutBtn2').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('admin_pasar-muaradua');
+      window.location.href = 'login.html';
+    });
+
+    // Update dashboard stats & name
+    document.addEventListener('DOMContentLoaded', function() {
+      const session = JSON.parse(localStorage.getItem('admin_pasar-muaradua') || '{}');
+      const name = session.name || 'Admin';
+
+      // Set names
+      document.getElementById('adminName').textContent = name;
+      document.getElementById('adminNameBanner').textContent = name.replace('Admin Desa ', '');
+      if (document.getElementById('profileName')) document.getElementById('profileName').textContent = name;
+
+      // Avatar initials
+      const initials = name.replace('Admin Desa ','').charAt(0).toUpperCase();
+      document.getElementById('adminAvatar').textContent = initials;
+      if (document.getElementById('profileAvatar')) document.getElementById('profileAvatar').textContent = initials;
+
+      // Infografis count
+      const infData = JSON.parse(localStorage.getItem('data_pasar-muaradua_infografis') || '[]');
+      document.getElementById('dashInfografis').textContent = infData.length;
+
+      // Penduduk count from data
+      const pendData = JSON.parse(localStorage.getItem('data_pasar-muaradua_penduduk') || 'null');
+      if (pendData) {
+        const total = pendData.reduce((sum, r) => sum + r.total, 0);
+        document.getElementById('dashPenduduk').textContent = total.toLocaleString('id-ID');
+      }
+    });
+  </script>
+</body>
+</html>
+

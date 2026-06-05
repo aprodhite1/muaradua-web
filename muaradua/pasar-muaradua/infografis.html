@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infografis – Desa Pasar Muaradua</title>
+  <meta name="description" content="Infografis data Desa Pasar Muaradua, Kecamatan Muaradua, OKU Selatan." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body { background: var(--bg-light); }
+    .infografis-hero {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--white); padding: 3rem 0;
+    }
+    .infografis-hero h1 { color: var(--white); font-size: 2rem; }
+    .infografis-hero p  { color: rgba(255,255,255,0.85); }
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .breadcrumb a { color: rgba(255,255,255,0.8); }
+
+    /* Filter Tabs */
+    .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .filter-tab {
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text-mid);
+      transition: var(--transition);
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* Infografis Grid */
+    .infografis-page-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Infografis Card Extended */
+    .inf-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .inf-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .inf-visual {
+      height: 220px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem; position: relative;
+    }
+    .inf-emoji { font-size: 4rem; }
+    .inf-chart { width: 100%; padding: 0 1.5rem; margin-top: 0.5rem; }
+    .inf-bar { height: 8px; border-radius: 4px; margin-bottom: 0.35rem; background: rgba(255,255,255,0.5); overflow: hidden; }
+    .inf-bar-fill { height: 100%; border-radius: 4px; background: rgba(255,255,255,0.9); }
+    .inf-bar-label { display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.8); margin-bottom: 0.5rem; }
+    .inf-body { padding: 1.25rem 1.5rem 1.5rem; }
+    .inf-body h4 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .inf-body p  { font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.75rem; }
+    .inf-body-footer { display: flex; justify-content: space-between; align-items: center; }
+
+    /* Chart Bars (Vertical) */
+    .bar-chart-vertical {
+      display: flex; align-items: flex-end; justify-content: center;
+      gap: 0.75rem; height: 100px; padding: 0 1rem; width: 100%;
+    }
+    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .bar-fill { border-radius: 4px 4px 0 0; background: rgba(255,255,255,0.85); width: 28px; transition: height 0.5s ease; }
+    .bar-label { font-size: 0.65rem; color: rgba(255,255,255,0.7); }
+    .bar-val   { font-size: 0.65rem; color: rgba(255,255,255,0.9); font-weight: 700; }
+
+    /* Donut (CSS Only) */
+    .donut-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; width: 100%; padding: 0 1rem; }
+    .donut {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(rgba(255,255,255,0.9) 0% 65%, rgba(255,255,255,0.25) 65% 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .donut::after {
+      content: ''; position: absolute;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: inherit;
+    }
+    .donut-inner { position: relative; z-index: 1; font-size: 0.9rem; font-weight: 800; color: white; }
+    .donut-legend { font-size: 0.72rem; color: rgba(255,255,255,0.8); }
+    .donut-legend span { display: block; margin-bottom: 0.2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Village Navbar -->
+  <header class="village-header">
+    <div class="container">
+      <a href="index.html" class="village-header-brand">
+        <div class="village-header-logo">🏘️</div>
+        <div>
+          <div class="village-header-title">Desa Pasar Muaradua</div>
+          <div class="village-header-sub">Kecamatan Muaradua, OKU Selatan</div>
+        </div>
+      </a>
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+      <nav class="village-nav" id="villageNav">
+        <a href="index.html">🏠 Beranda</a>
+        <a href="data.html">📊 Data Desa</a>
+        <a href="infografis.html" class="active">📈 Infografis</a>
+        <a href="login.html" class="btn-login">🔐 Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Infografis Hero -->
+  <section class="infografis-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../../index.html">Kecamatan Muaradua</a>
+        <span>/</span>
+        <a href="index.html">Desa Pasar Muaradua</a>
+        <span>/</span>
+        <span>Infografis</span>
+      </div>
+      <h1>📈 Infografis Desa Pasar Muaradua</h1>
+      <p>Visualisasi data kependudukan, sosial, dan ekonomi Desa Pasar Muaradua dalam format yang mudah dipahami.</p>
+    </div>
+  </section>
+
+  <!-- Infografis Content -->
+  <section style="padding: 2.5rem 0 4rem;">
+    <div class="container">
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterInfografis('semua', this)">Semua</button>
+        <button class="filter-tab" onclick="filterInfografis('kependudukan', this)">👥 Kependudukan</button>
+        <button class="filter-tab" onclick="filterInfografis('pendidikan', this)">📚 Pendidikan</button>
+        <button class="filter-tab" onclick="filterInfografis('ekonomi', this)">💼 Ekonomi</button>
+        <button class="filter-tab" onclick="filterInfografis('kesehatan', this)">🏥 Kesehatan</button>
+      </div>
+
+      <!-- Grid Infografis -->
+      <div class="infografis-page-grid" id="infografisGrid">
+        <!-- Diisi JS -->
+      </div>
+
+      <!-- Static Featured Cards -->
+      <h3 class="mt-4 mb-3" style="font-size:1.15rem;">📊 Infografis Unggulan</h3>
+      <div class="infografis-page-grid">
+
+        <!-- Piramida Penduduk -->
+        <div class="inf-card" data-cat="kependudukan">
+          <div class="inf-visual" style="background:linear-gradient(135deg,#1D4E89,#2E6DB4)">
+            <div class="bar-chart-vertical">
+              <div class="bar-col"><div class="bar-val">325</div><div class="bar-fill" style="height:32px"></div><div class="bar-label">65+</div></div>
+              <div class="bar-col"><div class="bar-val">580</div><div class="bar-fill" style="height:58px"></div><div class="bar-label">45-64</div></div>
+              <div class="bar-col"><div class="bar-val">820</div><div class="bar-fill" style="height:82px"></div><div class="bar-label">25-44</div></div>
+              <div class="bar-col"><div class="bar-val">708</div><div class="bar-fill" style="height:70px"></div><div class="bar-label">15-24</div></div>
+              <div class="bar-col"><div class="bar-val">812</div><div class="bar-fill" style="height:80px"></div><div class="bar-label">0-14</div></div>
+            </div>
+          </div>
+          <div class="inf-body">
+            <span class="badge badge-primary mb-1">Kependudukan</span>
+            <h4>Piramida Penduduk 2024</h4>
+            <p>Distribusi penduduk berdasarkan kelompok usia. Total 4.120 jiwa.</p>
+            <div class="inf-body-footer">
+              <span class="text-light" style="font-size:0.78rem">📅 April 2025</span>
+              <span class="badge badge-green">Terbaru</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mata Pencaharian -->
+        <div class="inf-card" data-cat="ekonomi">
+          <div class="inf-visual" style="background:linear-gradient(135deg,#E8820C,#C96A00)">
+            <div class="inf-emoji">💼</div>
+            <div class="inf-chart">
+              <div class="inf-bar-label"><span>🌾 Petani</span><span>35%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:35%"></div></div>
+              <div class="inf-bar-label"><span>🏪 Pedagang</span><span>14%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:14%"></div></div>
+              <div class="inf-bar-label"><span>🏢 PNS</span><span>8%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:8%"></div></div>
+            </div>
+          </div>
+          <div class="inf-body">
+            <span class="badge badge-accent mb-1">Ekonomi</span>
+            <h4>Distribusi Mata Pencaharian</h4>
+            <p>Petani mendominasi mata pencaharian warga Desa Pasar Muaradua.</p>
+            <div class="inf-body-footer">
+              <span class="text-light" style="font-size:0.78rem">📅 April 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tingkat Pendidikan Donut -->
+        <div class="inf-card" data-cat="pendidikan">
+          <div class="inf-visual" style="background:linear-gradient(135deg,#5E8E33,#79B443)">
+            <div class="donut-wrap">
+              <div class="donut"><div class="donut-inner">38%</div></div>
+              <div class="donut-legend">
+                <span>🟢 Tamat SMA: 38%</span>
+                <span>🔵 Tamat SMP: 25%</span>
+                <span>🟡 Tamat SD: 23%</span>
+                <span>⚪ Lainnya: 14%</span>
+              </div>
+            </div>
+          </div>
+          <div class="inf-body">
+            <span class="badge badge-green mb-1">Pendidikan</span>
+            <h4>Tingkat Pendidikan Warga</h4>
+            <p>38,5% warga telah menamatkan pendidikan SMA/Sederajat.</p>
+            <div class="inf-body-footer">
+              <span class="text-light" style="font-size:0.78rem">📅 April 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kesehatan -->
+        <div class="inf-card" data-cat="kesehatan">
+          <div class="inf-visual" style="background:linear-gradient(135deg,#C0392B,#e74c3c)">
+            <div class="inf-emoji">🏥</div>
+            <div class="inf-chart">
+              <div class="inf-bar-label"><span>💉 Imunisasi Lengkap</span><span>91%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:91%"></div></div>
+              <div class="inf-bar-label"><span>👶 Balita Sehat</span><span>95%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:95%"></div></div>
+              <div class="inf-bar-label"><span>🤱 Ibu Bersalin Nakes</span><span>88%</span></div>
+              <div class="inf-bar"><div class="inf-bar-fill" style="width:88%"></div></div>
+            </div>
+          </div>
+          <div class="inf-body">
+            <span class="badge mb-1" style="background:rgba(192,57,43,0.12);color:var(--red)">Kesehatan</span>
+            <h4>Indikator Kesehatan Desa</h4>
+            <p>Cakupan imunisasi dan kesehatan ibu anak di Desa Pasar Muaradua.</p>
+            <div class="inf-body-footer">
+              <span class="text-light" style="font-size:0.78rem">📅 April 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="footer-logo">🏘️</div><h4>Desa Pasar Muaradua</h4><p>Kecamatan Muaradua, Kabupaten OKU Selatan</p></div>
+        <div><h4>Navigasi</h4><ul><li><a href="index.html">Beranda</a></li><li><a href="data.html">Data Desa</a></li><li><a href="infografis.html">Infografis</a></li><li><a href="login.html">Admin Login</a></li></ul></div>
+        <div><h4>Kecamatan</h4><ul><li><a href="../../index.html">← Kecamatan Muaradua</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Desa Pasar Muaradua · Kecamatan Muaradua</p></div>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    function filterInfografis(cat, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.inf-card').forEach(card => {
+        const c = card.getAttribute('data-cat');
+        card.style.display = (cat === 'semua' || c === cat) ? 'block' : 'none';
+      });
+    }
+
+    // Render dynamic infografis from localStorage (admin-managed)
+    const villageId = 'pasar-muaradua';
+    const raw = localStorage.getItem('data_' + villageId + '_infografis');
+    const data = raw ? JSON.parse(raw) : [];
+    const grid = document.getElementById('infografisGrid');
+    if (data.length === 0) {
+      grid.innerHTML = '<p class="text-light" style="grid-column:1/-1;text-align:center;padding:2rem;">Belum ada infografis yang ditambahkan oleh admin.</p>';
+    } else {
+      grid.innerHTML = data.map(item => `
+        <div class="inf-card" data-cat="${item.kategori.toLowerCase()}">
+          <div class="inf-visual" style="background:${item.color || '#EEF3FA'};">
+            <div class="inf-emoji">${item.emoji}</div>
+          </div>
+          <div class="inf-body">
+            <span class="badge badge-primary mb-1">${item.kategori}</span>
+            <h4>${item.judul}</h4>
+            <p>${item.desc}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
+

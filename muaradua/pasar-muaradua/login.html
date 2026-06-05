@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Admin – Desa Pasar Muaradua</title>
+  <meta name="description" content="Halaman login admin Desa Pasar Muaradua, Kecamatan Muaradua." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #3a7bbf 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .login-page {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* Back Link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    .back-link:hover { color: var(--white); }
+
+    /* Login Card */
+    .login-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+
+    .login-header { text-align: center; margin-bottom: 2rem; }
+    .login-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 1rem;
+      box-shadow: 0 8px 24px rgba(29,78,137,0.3);
+    }
+    .login-header h2 { font-size: 1.4rem; color: var(--text-dark); }
+    .login-header p  { color: var(--text-light); font-size: 0.875rem; margin-top: 0.25rem; }
+
+    /* Input with Icon */
+    .input-icon-wrap { position: relative; }
+    .input-icon-wrap .icon {
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      font-size: 1rem; color: var(--text-light); pointer-events: none;
+    }
+    .input-icon-wrap input { padding-left: 2.75rem; }
+
+    /* Password toggle */
+    .toggle-pass {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      font-size: 1rem; color: var(--text-light); padding: 0;
+    }
+    .toggle-pass:hover { color: var(--primary); }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1rem;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 0.5rem;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(29,78,137,0.35);
+    }
+    .login-btn:active { transform: translateY(0); }
+
+    .login-hint {
+      background: var(--bg-section);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 1.5rem;
+    }
+    .login-hint strong { color: var(--text-dark); }
+    .login-hint code {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-family: 'Courier New', monospace;
+    }
+
+    .divider { text-align: center; color: var(--text-light); font-size: 0.8rem; margin: 1rem 0; position: relative; }
+    .divider::before, .divider::after {
+      content: ''; position: absolute; top: 50%;
+      width: 38%; height: 1px; background: var(--border);
+    }
+    .divider::before { left: 0; }
+    .divider::after  { right: 0; }
+
+    /* Footer */
+    .login-footer-bar {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.78rem;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div class="login-page">
+    <div class="login-wrapper animate-fade-in-up">
+
+      <!-- Back Link -->
+      <a href="index.html" class="back-link">← Kembali ke Beranda Desa</a>
+
+      <!-- Login Card -->
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-icon">🔐</div>
+          <h2>Login Admin Desa</h2>
+          <p>Portal pengelolaan data <strong>Desa Pasar Muaradua</strong></p>
+        </div>
+
+        <!-- Alert -->
+        <div id="loginAlert" class="alert alert-hidden"></div>
+
+        <!-- Form -->
+        <form id="loginForm" autocomplete="off">
+          <div class="form-group">
+            <label for="username">👤 Username Admin</label>
+            <div class="input-icon-wrap">
+              <span class="icon">👤</span>
+              <input type="text" id="username" placeholder="Masukkan username" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">🔑 Password</label>
+            <div class="input-icon-wrap">
+              <span class="icon">🔑</span>
+              <input type="password" id="password" placeholder="Masukkan password" required />
+              <button type="button" class="toggle-pass" id="togglePass" title="Tampilkan/sembunyikan password">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="login-btn">🚀 Masuk ke Dashboard Admin</button>
+        </form>
+
+        <div class="divider">Kredensial Demo</div>
+
+        <!-- Hint Box -->
+        <div class="login-hint">
+          <strong>🔑 Akun Demo untuk Desa Pasar Muaradua:</strong><br />
+          Username: <code>admin.pasarmuaradua</code><br />
+          Password: <code>pasarmuaradua123</code><br /><br />
+          <em>Setiap desa memiliki akun admin yang berbeda.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="login-footer-bar">
+    &copy; 2025 Kecamatan Muaradua · Desa Pasar Muaradua · OKU Selatan, Sumatera Selatan
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    // Toggle password visibility
+    document.getElementById('togglePass').addEventListener('click', function () {
+      const input = document.getElementById('password');
+      if (input.type === 'password') {
+        input.type = 'text';
+        this.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        this.textContent = '👁️';
+      }
+    });
+
+    // Redirect if already logged in
+    const villageId = 'pasar-muaradua';
+    const session = JSON.parse(localStorage.getItem('admin_' + villageId) || '{}');
+    if (session.logged) window.location.href = 'admin.html';
+  </script>
+</body>
+</html>
+

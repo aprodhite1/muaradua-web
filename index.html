@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kecamatan Muaradua – OKU Selatan, Sumatera Selatan</title>
+  <meta name="description" content="Website resmi Kecamatan Muaradua, Kabupaten OKU Selatan, Sumatera Selatan. Temukan informasi dan data seluruh desa di Kecamatan Muaradua." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Homepage Specific */
+    .kec-topbar {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.78rem;
+      padding: 0.4rem 0;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .main-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .main-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .main-brand { display: flex; align-items: center; gap: 1rem; }
+    .main-logo {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+    }
+    .main-brand-text h1 { font-size: 1.1rem; color: var(--text-dark); }
+    .main-brand-text p  { font-size: 0.78rem; color: var(--text-light); font-weight: 400; }
+
+    /* Hero */
+    .main-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #3a7bbf 100%);
+      color: var(--white);
+      padding: 5rem 0 7rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .main-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .main-hero-content { position: relative; z-index: 1; }
+    .main-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 0.35rem 1.1rem;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+    }
+    .main-hero h1 { color: var(--white); margin-bottom: 1rem; }
+    .main-hero p  { color: rgba(255,255,255,0.85); font-size: 1.15rem; max-width: 600px; margin: 0 auto 2rem; }
+    .hero-stats {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat-item { text-align: center; }
+    .hero-stat-item .number { font-size: 2rem; font-weight: 800; color: var(--white); }
+    .hero-stat-item .label  { font-size: 0.8rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+    .hero-wave {
+      position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0;
+    }
+
+    /* Village Section */
+    .village-section { padding: 4rem 0; background: var(--white); }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-section);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+    .search-bar span { font-size: 1.2rem; color: var(--text-light); }
+    .search-bar input {
+      border: none; background: transparent; outline: none;
+      font-family: var(--font); font-size: 0.95rem; color: var(--text-dark);
+      width: 100%;
+    }
+    .villages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* About Section */
+    .about-section { background: var(--bg-section); padding: 4rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-text h2 { margin-bottom: 1rem; }
+    .about-text p  { margin-bottom: 1rem; }
+    .about-img {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      border-radius: var(--radius-xl);
+      height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Quick Links */
+    .quicklinks { padding: 4rem 0; background: var(--white); }
+    .quicklink-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    }
+    .quicklink-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--primary); }
+    .quicklink-icon {
+      width: 64px; height: 64px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+    .quicklink-card h4 { font-size: 1rem; }
+    .quicklink-card p  { font-size: 0.83rem; color: var(--text-light); }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img  { height: 220px; font-size: 4rem; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="kec-topbar">
+    🏛️ Pemerintah Kecamatan Muaradua &nbsp;|&nbsp; Kabupaten OKU Selatan &nbsp;|&nbsp; Sumatera Selatan
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <div class="main-brand">
+        <div class="main-logo">🏛️</div>
+        <div class="main-brand-text">
+          <h1>Kecamatan Muaradua</h1>
+          <p>Kabupaten OKU Selatan, Sumatera Selatan</p>
+        </div>
+      </div>
+      <nav style="display:flex;gap:1rem;align-items:center;">
+        <a href="index.html" style="font-size:0.875rem;font-weight:600;color:var(--primary);">Beranda</a>
+        <a href="#desa" style="font-size:0.875rem;font-weight:500;color:var(--text-mid);">Desa</a>
+        <a href="#tentang" style="font-size:0.875rem;font-weight:500;color:var(--text-mid);">Tentang</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="main-hero">
+    <div class="container">
+      <div class="main-hero-content animate-fade-in-up">
+        <div class="main-hero-eyebrow">🇮🇩 Website Resmi Kecamatan</div>
+        <h1>Selamat Datang di<br>Kecamatan Muaradua</h1>
+        <p>Portal informasi terpadu kependudukan, data desa, dan layanan publik seluruh desa di wilayah Kecamatan Muaradua.</p>
+        <a href="#desa" class="btn btn-ghost" style="font-size:1rem;padding:0.85rem 2rem;">🏘️ Lihat Semua Desa</a>
+        <div class="hero-stats animate-fade-in-up delay-2">
+          <div class="hero-stat-item">
+            <div class="number">8</div>
+            <div class="label">Desa / Kelurahan</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="number">19.145</div>
+            <div class="label">Total Penduduk</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="number">64,2 km²</div>
+            <div class="label">Luas Wilayah</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="number">2024</div>
+            <div class="label">Data Terkini</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path fill="#ffffff" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Village Selection Section -->
+  <section class="village-section" id="desa">
+    <div class="container">
+      <div class="section-header animate-fade-in-up">
+        <span class="badge badge-primary mb-2">🏘️ Daftar Desa</span>
+        <h2>Pilih Desa yang Ingin Anda Kunjungi</h2>
+        <p>Klik salah satu desa di bawah ini untuk melihat informasi, data kependudukan, dan infografis desa tersebut.</p>
+      </div>
+
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" id="searchVillage" placeholder="Cari nama desa..." oninput="filterVillages(this.value)" />
+      </div>
+
+      <div class="villages-grid" id="villagesGrid">
+        <!-- Diisi oleh JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="tentang">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text animate-fade-in-up">
+          <span class="badge badge-green mb-3">Tentang Kecamatan</span>
+          <h2>Kecamatan Muaradua, OKU Selatan</h2>
+          <p>Kecamatan Muaradua merupakan salah satu kecamatan di Kabupaten Ogan Komering Ulu (OKU) Selatan, Provinsi Sumatera Selatan. Kecamatan ini menjadi pusat pemerintahan Kabupaten OKU Selatan.</p>
+          <p>Dengan berbagai potensi alam, pertanian, dan sumber daya manusia yang dimiliki, Kecamatan Muaradua terus berkembang dan berinovasi untuk meningkatkan kesejahteraan masyarakatnya.</p>
+          <div class="stats-grid mt-3" style="grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="stat-card">
+              <div class="stat-icon blue">🗺️</div>
+              <div class="stat-info"><h4>Luas Wilayah</h4><div class="value">64,2 km²</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">🏘️</div>
+              <div class="stat-info"><h4>Jumlah Desa</h4><div class="value">8 Desa</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-img animate-fade-in-up delay-2">🏔️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="quicklinks">
+    <div class="container">
+      <div class="section-header animate-fade-in-up">
+        <span class="badge badge-accent mb-2">Layanan</span>
+        <h2>Layanan Informasi Publik</h2>
+        <p>Akses berbagai informasi dan layanan publik yang tersedia di Kecamatan Muaradua.</p>
+      </div>
+      <div class="grid-4 animate-fade-in-up delay-1">
+        <div class="quicklink-card">
+          <div class="quicklink-icon" style="background:rgba(29,78,137,0.1)">📊</div>
+          <h4>Data Kependudukan</h4>
+          <p>Statistik penduduk per desa</p>
+        </div>
+        <div class="quicklink-card">
+          <div class="quicklink-icon" style="background:rgba(121,180,67,0.1)">🌾</div>
+          <h4>Potensi Desa</h4>
+          <p>Informasi potensi sumber daya</p>
+        </div>
+        <div class="quicklink-card">
+          <div class="quicklink-icon" style="background:rgba(232,130,12,0.1)">📋</div>
+          <h4>Infografis</h4>
+          <p>Visualisasi data desa</p>
+        </div>
+        <div class="quicklink-card">
+          <div class="quicklink-icon" style="background:rgba(192,57,43,0.1)">🏥</div>
+          <h4>Layanan Kesehatan</h4>
+          <p>Fasilitas kesehatan desa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🏛️</div>
+          <h4>Kecamatan Muaradua</h4>
+          <p>Kabupaten OKU Selatan, Sumatera Selatan</p>
+          <p class="mt-2">Jl. Merdeka No. 1, Muaradua, OKU Selatan, Sumatera Selatan 32211</p>
+        </div>
+        <div>
+          <h4>Desa</h4>
+          <ul>
+            <li><a href="muaradua/muara-dua/">Muara Dua</a></li>
+            <li><a href="muaradua/gunung-batu/">Gunung Batu</a></li>
+            <li><a href="muaradua/batu-belang/">Batu Belang</a></li>
+            <li><a href="muaradua/tanjung-jaya/">Tanjung Jaya</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tautan</h4>
+          <ul>
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#desa">Pilih Desa</a></li>
+            <li><a href="#tentang">Tentang Kecamatan</a></li>
+            <li><a href="https://okuselatankab.go.id" target="_blank">OKU Selatan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Kecamatan Muaradua. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Render village cards dinamis
+    const villages_data = [
+      { id: 'muara-dua',       name: 'Muara Dua',       kepala: 'Bapak Syahril',      penduduk: '3.245', luas: '12.5 km²', emoji: '🏘️', color: 'linear-gradient(135deg,#1D4E89,#2E6DB4)' },
+      { id: 'gunung-batu',     name: 'Gunung Batu',     kepala: 'Bapak Ruslan',       penduduk: '2.180', luas: '8.3 km²',  emoji: '⛰️', color: 'linear-gradient(135deg,#2E6DB4,#5a9fd4)' },
+      { id: 'batu-belang',     name: 'Batu Belang',     kepala: 'Bapak Armansyah',    penduduk: '1.850', luas: '6.7 km²',  emoji: '🌄', color: 'linear-gradient(135deg,#163A66,#1D4E89)' },
+      { id: 'tanjung-jaya',    name: 'Tanjung Jaya',    kepala: 'Bapak Irfan',        penduduk: '2.560', luas: '9.1 km²',  emoji: '🌊', color: 'linear-gradient(135deg,#79B443,#5E8E33)' },
+      { id: 'sukarami',        name: 'Sukarami',        kepala: 'Bapak Junaidi',      penduduk: '1.620', luas: '5.4 km²',  emoji: '🌾', color: 'linear-gradient(135deg,#E8820C,#C96A00)' },
+      { id: 'sinar-harapan',   name: 'Sinar Harapan',   kepala: 'Bapak Rahmat',       penduduk: '2.090', luas: '7.8 km²',  emoji: '🌟', color: 'linear-gradient(135deg,#5E8E33,#79B443)' },
+      { id: 'pasar-muaradua',  name: 'Pasar Muaradua',  kepala: 'Bapak Hermansyah',   penduduk: '4.120', luas: '4.2 km²',  emoji: '🏪', color: 'linear-gradient(135deg,#C96A00,#E8820C)' },
+      { id: 'padang-bindu',    name: 'Padang Bindu',    kepala: 'Bapak Muslidin',     penduduk: '1.480', luas: '10.2 km²', emoji: '🌿', color: 'linear-gradient(135deg,#1D4E89,#163A66)' },
+    ];
+
+    function renderVillageCards(list) {
+      const grid = document.getElementById('villagesGrid');
+      grid.innerHTML = list.map((v, i) => `
+        <a href="muaradua/${v.id}/" class="village-card animate-fade-in-up delay-${(i%4)+1}">
+          <div class="village-card-thumb" style="background:${v.color}">${v.emoji}</div>
+          <div class="village-card-body">
+            <div class="village-card-name">${v.name}</div>
+            <div class="village-card-meta">👤 ${v.kepala} &nbsp;|&nbsp; 📐 ${v.luas}</div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">
+              <span class="badge badge-primary">👥 ${v.penduduk} jiwa</span>
+            </div>
+            <div class="village-card-footer">
+              <span>Kunjungi Desa</span>
+              <span>→</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function filterVillages(q) {
+      const filtered = villages_data.filter(v => v.name.toLowerCase().includes(q.toLowerCase()));
+      renderVillageCards(filtered);
+    }
+
+    renderVillageCards(villages_data);
+  </script>
+</body>
+</html>

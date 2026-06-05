@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Desa – Desa Pasar Muaradua</title>
+  <meta name="description" content="Data kependudukan, pendidikan, ekonomi, dan sosial Desa Pasar Muaradua, Kecamatan Muaradua." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body { background: var(--bg-light); }
+    .page-title-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    .page-title-bar .container { display: flex; align-items: center; gap: 0.75rem; }
+    .page-title-bar h2 { font-size: 1.3rem; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-light); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--primary); }
+    .breadcrumb span { color: var(--text-light); }
+
+    .data-content { padding: 1.5rem; }
+    .data-section { display: none; }
+    .data-section.active { display: block; }
+
+    .data-header { margin-bottom: 1.5rem; }
+    .data-header h3 { font-size: 1.2rem; }
+    .data-header p  { color: var(--text-light); font-size: 0.9rem; }
+
+    /* Summary Bar */
+    .summary-bar { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .summary-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .summary-pill span.dot { width: 8px; height: 8px; border-radius: 50%; }
+  </style>
+</head>
+<body>
+
+  <!-- Village Navbar -->
+  <header class="village-header">
+    <div class="container">
+      <a href="index.html" class="village-header-brand">
+        <div class="village-header-logo">🏘️</div>
+        <div>
+          <div class="village-header-title">Desa Pasar Muaradua</div>
+          <div class="village-header-sub">Kecamatan Muaradua, OKU Selatan</div>
+        </div>
+      </a>
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+      <nav class="village-nav" id="villageNav">
+        <a href="index.html">🏠 Beranda</a>
+        <a href="data.html" class="active">📊 Data Desa</a>
+        <a href="infografis.html">📈 Infografis</a>
+        <a href="login.html" class="btn-login">🔐 Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Title Bar -->
+  <div class="page-title-bar">
+    <div class="container" style="flex-direction:column;align-items:flex-start;gap:0.35rem;">
+      <div class="breadcrumb">
+        <a href="../../index.html">Kecamatan Muaradua</a>
+        <span>/</span>
+        <a href="index.html">Desa Pasar Muaradua</a>
+        <span>/</span>
+        <span>Data Desa</span>
+      </div>
+      <h2>📊 Data Desa Pasar Muaradua</h2>
+    </div>
+  </div>
+
+  <!-- Layout with Sidebar -->
+  <div class="page-with-sidebar">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Jenis Data</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active" onclick="showSection('kependudukan',this)"><span class="icon">👥</span> Kependudukan</a></li>
+        <li><a href="#" onclick="showSection('pendidikan',this)"><span class="icon">📚</span> Pendidikan</a></li>
+        <li><a href="#" onclick="showSection('ekonomi',this)"><span class="icon">💼</span> Ekonomi & Mata Pencaharian</a></li>
+        <li><a href="#" onclick="showSection('kesehatan',this)"><span class="icon">🏥</span> Kesehatan</a></li>
+        <li><a href="#" onclick="showSection('infrastruktur',this)"><span class="icon">🏗️</span> Infrastruktur</a></li>
+        <li><a href="#" onclick="showSection('pertanian',this)"><span class="icon">🌾</span> Pertanian</a></li>
+        <li><a href="#" onclick="showSection('sosial',this)"><span class="icon">🤝</span> Sosial & Budaya</a></li>
+      </ul>
+      <div class="sidebar-section-title">Informasi</div>
+      <ul class="sidebar-menu">
+        <li><a href="index.html"><span class="icon">🏠</span> Profil Desa</a></li>
+        <li><a href="infografis.html"><span class="icon">📈</span> Infografis</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="data-content">
+
+      <!-- ============ KEPENDUDUKAN ============ -->
+      <div id="section-kependudukan" class="data-section active animate-fade-in-up">
+        <div class="data-header">
+          <h3>👥 Data Kependudukan</h3>
+          <p>Data penduduk Desa Pasar Muaradua berdasarkan wilayah RT/RW. Diperbarui terakhir: April 2025.</p>
+        </div>
+
+        <div class="summary-bar">
+          <div class="summary-pill"><span class="dot" style="background:var(--primary)"></span>Total: <strong>4.120 jiwa</strong></div>
+          <div class="summary-pill"><span class="dot" style="background:#4A90D9"></span>Laki-laki: <strong>1.652</strong></div>
+          <div class="summary-pill"><span class="dot" style="background:#E8820C"></span>Perempuan: <strong>1.593</strong></div>
+          <div class="summary-pill"><span class="dot" style="background:var(--green)"></span>KK: <strong>1.163</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header flex-between">
+            <span>Tabel Penduduk per RT/RW</span>
+            <span class="badge badge-green">Data 2024</span>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th><th>RT</th><th>RW</th><th>Laki-laki</th><th>Perempuan</th><th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="pendudukTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-light)">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid-2 mt-4">
+          <div class="card">
+            <div class="card-header">📊 Kelompok Usia</div>
+            <div class="card-body">
+              <table>
+                <thead><tr><th>Kelompok Usia</th><th>Jumlah</th><th>%</th></tr></thead>
+                <tbody>
+                  <tr><td>0 – 14 tahun</td><td>812</td><td>25%</td></tr>
+                  <tr><td>15 – 64 tahun</td><td>2.108</td><td>65%</td></tr>
+                  <tr><td>65+ tahun</td><td>325</td><td>10%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">📌 Status Perkawinan</div>
+            <div class="card-body">
+              <table>
+                <thead><tr><th>Status</th><th>Jumlah</th></tr></thead>
+                <tbody>
+                  <tr><td>Belum Kawin</td><td>1.124</td></tr>
+                  <tr><td>Kawin</td><td>1.780</td></tr>
+                  <tr><td>Cerai Hidup</td><td>148</td></tr>
+                  <tr><td>Cerai Mati</td><td>193</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PENDIDIKAN ============ -->
+      <div id="section-pendidikan" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>📚 Data Pendidikan</h3>
+          <p>Data tingkat pendidikan warga Desa Pasar Muaradua.</p>
+        </div>
+        <div class="stats-grid mb-4">
+          <div class="stat-card"><div class="stat-icon blue">🏫</div><div class="stat-info"><h4>Fasilitas Pendidikan</h4><div class="value">4</div><div class="sub">SD, SMP, TK, PAUD</div></div></div>
+          <div class="stat-card"><div class="stat-icon green">📖</div><div class="stat-info"><h4>Melek Huruf</h4><div class="value">90,5%</div><div class="sub">warga 15+ tahun</div></div></div>
+          <div class="stat-card"><div class="stat-icon orange">🎓</div><div class="stat-info"><h4>Tamat SMA/Sederajat</h4><div class="value">38,5%</div><div class="sub">dari total warga</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">📋 Tingkat Pendidikan Warga</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Tingkat Pendidikan</th><th>Laki-laki</th><th>Perempuan</th><th>Total</th></tr></thead>
+              <tbody>
+                <tr><td>Tidak / Belum Sekolah</td><td>142</td><td>158</td><td>300</td></tr>
+                <tr><td>Belum Tamat SD</td><td>210</td><td>195</td><td>405</td></tr>
+                <tr><td>Tamat SD/Sederajat</td><td>385</td><td>362</td><td>747</td></tr>
+                <tr><td>SMP/Sederajat</td><td>420</td><td>398</td><td>818</td></tr>
+                <tr><td>SMA/SMK/Sederajat</td><td>328</td><td>322</td><td>650</td></tr>
+                <tr><td>Diploma/Sarjana</td><td>167</td><td>158</td><td>325</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>1.652</strong></td><td><strong>1.593</strong></td><td><strong>4.120</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ EKONOMI ============ -->
+      <div id="section-ekonomi" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>💼 Data Ekonomi & Mata Pencaharian</h3>
+          <p>Distribusi mata pencaharian utama warga Desa Pasar Muaradua.</p>
+        </div>
+        <div class="stats-grid mb-4">
+          <div class="stat-card"><div class="stat-icon green">🌾</div><div class="stat-info"><h4>Petani</h4><div class="value">542</div><div class="sub">orang</div></div></div>
+          <div class="stat-card"><div class="stat-icon orange">🏪</div><div class="stat-info"><h4>Pedagang/Wirausaha</h4><div class="value">218</div><div class="sub">orang</div></div></div>
+          <div class="stat-card"><div class="stat-icon blue">🏢</div><div class="stat-info"><h4>PNS/TNI/Polri</h4><div class="value">127</div><div class="sub">orang</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">📋 Tabel Mata Pencaharian</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Mata Pencaharian</th><th>Jumlah</th><th>Persentase</th></tr></thead>
+              <tbody>
+                <tr><td>🌾 Petani / Buruh Tani</td><td>542</td><td>35,2%</td></tr>
+                <tr><td>🏪 Pedagang / Wiraswasta</td><td>218</td><td>14,2%</td></tr>
+                <tr><td>🏢 PNS / TNI / Polri</td><td>127</td><td>8,2%</td></tr>
+                <tr><td>🔧 Buruh Bangunan/Industri</td><td>195</td><td>12,7%</td></tr>
+                <tr><td>🚗 Jasa Transportasi</td><td>86</td><td>5,6%</td></tr>
+                <tr><td>📦 Lainnya</td><td>172</td><td>11,2%</td></tr>
+                <tr><td>❌ Tidak Bekerja / Pelajar</td><td>200</td><td>13,0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ KESEHATAN ============ -->
+      <div id="section-kesehatan" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>🏥 Data Kesehatan</h3>
+          <p>Fasilitas dan kondisi kesehatan masyarakat Desa Pasar Muaradua.</p>
+        </div>
+        <div class="stats-grid mb-4">
+          <div class="stat-card"><div class="stat-icon red">🏥</div><div class="stat-info"><h4>Posyandu</h4><div class="value">3</div><div class="sub">unit aktif</div></div></div>
+          <div class="stat-card"><div class="stat-icon blue">👶</div><div class="stat-info"><h4>Balita Sehat</h4><div class="value">312</div><div class="sub">dari 328 balita</div></div></div>
+          <div class="stat-card"><div class="stat-icon green">💉</div><div class="stat-info"><h4>Imunisasi Lengkap</h4><div class="value">91,3%</div><div class="sub">bayi 0–12 bulan</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">📋 Fasilitas Kesehatan</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Fasilitas</th><th>Jumlah</th><th>Keterangan</th></tr></thead>
+              <tbody>
+                <tr><td>Posyandu</td><td>3 Unit</td><td>Aktif setiap bulan</td></tr>
+                <tr><td>Polindes</td><td>1 Unit</td><td>Bidan desa bertugas</td></tr>
+                <tr><td>Puskesmas Pembantu</td><td>1 Unit</td><td>Jarak 0,5 km dari kantor desa</td></tr>
+                <tr><td>Bidan Praktek Mandiri</td><td>2 Orang</td><td>Aktif praktek</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ INFRASTRUKTUR ============ -->
+      <div id="section-infrastruktur" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>🏗️ Data Infrastruktur</h3>
+          <p>Kondisi infrastruktur jalan, jembatan, dan fasilitas umum desa.</p>
+        </div>
+        <div class="card">
+          <div class="card-header">📋 Kondisi Jalan & Jembatan</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Jenis</th><th>Panjang/Jumlah</th><th>Kondisi</th></tr></thead>
+              <tbody>
+                <tr><td>Jalan Aspal</td><td>4,2 km</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>Jalan Makadam</td><td>3,8 km</td><td><span class="badge badge-accent">Sedang</span></td></tr>
+                <tr><td>Jalan Tanah</td><td>2,1 km</td><td><span class="badge" style="background:rgba(192,57,43,0.12);color:var(--red)">Perlu Perbaikan</span></td></tr>
+                <tr><td>Jembatan Beton</td><td>3 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>Jembatan Kayu</td><td>2 unit</td><td><span class="badge badge-accent">Perlu Perhatian</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-header">📋 Fasilitas Umum</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Fasilitas</th><th>Jumlah</th><th>Kondisi</th></tr></thead>
+              <tbody>
+                <tr><td>Masjid / Musala</td><td>6 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>Sekolah Dasar</td><td>2 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>SMP</td><td>1 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>PAUD/TK</td><td>2 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>Kantor Desa</td><td>1 unit</td><td><span class="badge badge-green">Baik</span></td></tr>
+                <tr><td>Balai Desa</td><td>1 unit</td><td><span class="badge badge-accent">Renovasi</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PERTANIAN ============ -->
+      <div id="section-pertanian" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>🌾 Data Pertanian</h3>
+          <p>Potensi dan produksi pertanian Desa Pasar Muaradua.</p>
+        </div>
+        <div class="stats-grid mb-4">
+          <div class="stat-card"><div class="stat-icon green">🌾</div><div class="stat-info"><h4>Lahan Sawah</h4><div class="value">48,5 Ha</div><div class="sub">lahan aktif</div></div></div>
+          <div class="stat-card"><div class="stat-icon orange">🌽</div><div class="stat-info"><h4>Produksi Padi</h4><div class="value">285 Ton</div><div class="sub">per tahun</div></div></div>
+          <div class="stat-card"><div class="stat-icon blue">👨‍🌾</div><div class="stat-info"><h4>Petani Aktif</h4><div class="value">542</div><div class="sub">orang terdaftar</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">📋 Komoditas Pertanian</div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Komoditas</th><th>Luas Tanam</th><th>Produksi/Tahun</th></tr></thead>
+              <tbody>
+                <tr><td>🌾 Padi Sawah</td><td>48,5 Ha</td><td>285 Ton</td></tr>
+                <tr><td>🌽 Jagung</td><td>12,3 Ha</td><td>74 Ton</td></tr>
+                <tr><td>🥬 Sayuran</td><td>5,8 Ha</td><td>52 Ton</td></tr>
+                <tr><td>🌿 Karet</td><td>28,4 Ha</td><td>38 Ton (karet kering)</td></tr>
+                <tr><td>☕ Kopi</td><td>15,2 Ha</td><td>22 Ton</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SOSIAL BUDAYA ============ -->
+      <div id="section-sosial" class="data-section animate-fade-in-up">
+        <div class="data-header">
+          <h3>🤝 Data Sosial & Budaya</h3>
+          <p>Data kehidupan sosial dan budaya masyarakat desa.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">🕌 Agama</div>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Agama</th><th>Jumlah</th><th>%</th></tr></thead>
+                <tbody>
+                  <tr><td>Islam</td><td>3.210</td><td>98,9%</td></tr>
+                  <tr><td>Kristen</td><td>28</td><td>0,9%</td></tr>
+                  <tr><td>Lainnya</td><td>7</td><td>0,2%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">👥 Organisasi Sosial</div>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr><th>Organisasi</th><th>Anggota</th></tr></thead>
+                <tbody>
+                  <tr><td>PKK Desa</td><td>145 Orang</td></tr>
+                  <tr><td>Karang Taruna</td><td>87 Orang</td></tr>
+                  <tr><td>Kelompok Tani</td><td>4 Kelompok</td></tr>
+                  <tr><td>Koperasi Desa</td><td>212 Anggota</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🏘️</div>
+          <h4>Desa Pasar Muaradua</h4>
+          <p>Kecamatan Muaradua, Kabupaten OKU Selatan, Sumatera Selatan</p>
+        </div>
+        <div>
+          <h4>Data Desa</h4>
+          <ul>
+            <li><a href="#" onclick="showSection('kependudukan',null)">Kependudukan</a></li>
+            <li><a href="#" onclick="showSection('pendidikan',null)">Pendidikan</a></li>
+            <li><a href="#" onclick="showSection('ekonomi',null)">Ekonomi</a></li>
+            <li><a href="#" onclick="showSection('kesehatan',null)">Kesehatan</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="index.html">Beranda Desa</a></li>
+            <li><a href="infografis.html">Infografis</a></li>
+            <li><a href="login.html">Admin Login</a></li>
+            <li><a href="../../index.html">← Kecamatan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Desa Pasar Muaradua · Kecamatan Muaradua · OKU Selatan</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    function showSection(id, el) {
+      // Hide all sections
+      document.querySelectorAll('.data-section').forEach(s => s.classList.remove('active'));
+      // Show target
+      const target = document.getElementById('section-' + id);
+      if (target) { target.classList.add('active'); target.classList.add('animate-fade-in-up'); }
+      // Update sidebar active
+      document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+      if (el) el.classList.add('active');
+      return false;
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desa Pasar Muaradua – Kecamatan Muaradua</title>
+  <meta name="description" content="Website resmi Desa Pasar Muaradua, Kecamatan Muaradua, OKU Selatan. Informasi desa, data kependudukan, dan infografis." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    body { background: var(--bg-light); }
+
+    /* Village Hero */
+    .village-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #3a7bbf 100%);
+      color: var(--white);
+      padding: 4rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .village-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .village-hero-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 2rem; }
+    .village-hero-icon { font-size: 5rem; flex-shrink: 0; }
+    .village-hero-text .eyebrow { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+    .village-hero-text h1 { color: var(--white); margin-bottom: 0.5rem; }
+    .village-hero-text p { color: rgba(255,255,255,0.85); font-size: 1rem; }
+    .village-hero-wave { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; }
+
+    /* Quick Stats */
+    .quick-stats { margin-top: -3rem; position: relative; z-index: 2; margin-bottom: 2rem; }
+
+    /* News/Updates */
+    .update-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); margin-top: 0.4rem; flex-shrink: 0; }
+    .update-content h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .update-content span { font-size: 0.8rem; color: var(--text-light); }
+
+    /* Profile Grid */
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .profile-item { padding: 1rem; background: var(--bg-section); border-radius: var(--radius-sm); }
+    .profile-item label { font-size: 0.75rem; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .profile-item p { font-size: 0.95rem; font-weight: 600; color: var(--text-dark); margin-top: 0.25rem; }
+
+    @media (max-width: 600px) {
+      .village-hero-inner { flex-direction: column; text-align: center; }
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Village Header / Navbar -->
+  <header class="village-header">
+    <div class="container">
+      <a href="index.html" class="village-header-brand">
+        <div class="village-header-logo">🏘️</div>
+        <div>
+          <div class="village-header-title">Desa Pasar Muaradua</div>
+          <div class="village-header-sub">Kecamatan Muaradua, OKU Selatan</div>
+        </div>
+      </a>
+      <button class="hamburger" id="hamburgerBtn">☰</button>
+      <nav class="village-nav" id="villageNav">
+        <a href="index.html" class="active">🏠 Beranda</a>
+        <a href="data.html">📊 Data Desa</a>
+        <a href="infografis.html">📈 Infografis</a>
+        <a href="login.html" class="btn-login">🔐 Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Village Hero -->
+  <section class="village-hero">
+    <div class="container">
+      <div class="village-hero-inner animate-fade-in-up">
+        <div class="village-hero-icon">🏘️</div>
+        <div class="village-hero-text">
+          <div class="eyebrow">🏛️ Kecamatan Muaradua · OKU Selatan</div>
+          <h1>Desa Pasar Muaradua</h1>
+          <p>Selamat datang di portal informasi resmi Desa Pasar Muaradua. Temukan data kependudukan, profil desa, dan infografis terkini.</p>
+          <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="data.html" class="btn btn-ghost">📊 Lihat Data Desa</a>
+            <a href="infografis.html" class="btn" style="background:var(--accent);color:#fff;">📈 Infografis</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="village-hero-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path fill="#F4F7FB" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <div class="container quick-stats animate-fade-in-up delay-2">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">👥</div>
+        <div class="stat-info"><h4>Total Penduduk</h4><div class="value">4.120</div><div class="sub">jiwa (2024)</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">🏠</div>
+        <div class="stat-info"><h4>Kepala Keluarga</h4><div class="value">1.163</div><div class="sub">KK terdaftar</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">📐</div>
+        <div class="stat-info"><h4>Luas Wilayah</h4><div class="value">12,5 km²</div><div class="sub">luas total desa</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red">🎓</div>
+        <div class="stat-info"><h4>Angka Melek Huruf</h4><div class="value">90,5%</div><div class="sub">warga usia 15+</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" style="padding-bottom:3rem;">
+    <div class="grid-2 mt-4">
+
+      <!-- Profil Desa -->
+      <div class="card animate-fade-in-up delay-1">
+        <div class="card-header" style="display:flex;align-items:center;gap:0.5rem;">
+          🏛️ Profil Desa
+        </div>
+        <div class="card-body">
+          <div class="profile-grid">
+            <div class="profile-item"><label>Nama Desa</label><p>Pasar Muaradua</p></div>
+            <div class="profile-item"><label>Kecamatan</label><p>Muaradua</p></div>
+            <div class="profile-item"><label>Kabupaten</label><p>OKU Selatan</p></div>
+            <div class="profile-item"><label>Provinsi</label><p>Sumatera Selatan</p></div>
+            <div class="profile-item"><label>Kepala Desa</label><p>Bapak Hermansyah</p></div>
+            <div class="profile-item"><label>Kode Pos</label><p>32211</p></div>
+            <div class="profile-item"><label>Jumlah RT</label><p>8 RT</p></div>
+            <div class="profile-item"><label>Jumlah RW</label><p>4 RW</p></div>
+          </div>
+          <a href="data.html" class="btn btn-outline mt-3 w-full" style="justify-content:center;">Lihat Data Lengkap →</a>
+        </div>
+      </div>
+
+      <!-- Berita & Pengumuman -->
+      <div class="card animate-fade-in-up delay-2">
+        <div class="card-header" style="display:flex;align-items:center;gap:0.5rem;">
+          📢 Pengumuman Terbaru
+        </div>
+        <div class="card-body">
+          <div class="update-item">
+            <div class="update-dot" style="background:var(--accent)"></div>
+            <div class="update-content">
+              <h4>Musyawarah Desa Rencana Pembangunan 2025</h4>
+              <span>📅 28 April 2025</span>
+            </div>
+          </div>
+          <div class="update-item">
+            <div class="update-dot" style="background:var(--green)"></div>
+            <div class="update-content">
+              <h4>Pembagian Bantuan Pangan Non-Tunai</h4>
+              <span>📅 20 April 2025</span>
+            </div>
+          </div>
+          <div class="update-item">
+            <div class="update-dot"></div>
+            <div class="update-content">
+              <h4>Jadwal Posyandu Balita Bulan Mei</h4>
+              <span>📅 15 April 2025</span>
+            </div>
+          </div>
+          <div class="update-item">
+            <div class="update-dot"></div>
+            <div class="update-content">
+              <h4>Pembaruan Data Administrasi Kependudukan</h4>
+              <span>📅 5 April 2025</span>
+            </div>
+          </div>
+          <div class="update-item">
+            <div class="update-dot"></div>
+            <div class="update-content">
+              <h4>Gotong Royong Bersih Desa</h4>
+              <span>📅 1 April 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Potensi Desa -->
+    <div class="card mt-4 animate-fade-in-up delay-3">
+      <div class="card-header">🌿 Potensi Desa</div>
+      <div class="card-body">
+        <div class="grid-3">
+          <div style="text-align:center;padding:1.25rem;background:var(--bg-section);border-radius:var(--radius-sm);">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🌾</div>
+            <h4>Pertanian</h4>
+            <p style="font-size:0.85rem;">Padi, jagung, dan sayuran sebagai komoditas utama</p>
+          </div>
+          <div style="text-align:center;padding:1.25rem;background:var(--bg-section);border-radius:var(--radius-sm);">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🐟</div>
+            <h4>Perikanan</h4>
+            <p style="font-size:0.85rem;">Budidaya ikan air tawar dan hasil sungai</p>
+          </div>
+          <div style="text-align:center;padding:1.25rem;background:var(--bg-section);border-radius:var(--radius-sm);">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem;">🏔️</div>
+            <h4>Wisata Alam</h4>
+            <p style="font-size:0.85rem;">Potensi wisata alam sungai dan perbukitan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">🏘️</div>
+          <h4>Desa Pasar Muaradua</h4>
+          <p>Kecamatan Muaradua, Kabupaten OKU Selatan, Sumatera Selatan</p>
+        </div>
+        <div>
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="data.html">Data Desa</a></li>
+            <li><a href="infografis.html">Infografis</a></li>
+            <li><a href="login.html">Admin Login</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kecamatan</h4>
+          <ul>
+            <li><a href="../../index.html">← Kecamatan Muaradua</a></li>
+            <li><a href="../../muaradua/gunung-batu/">Desa Gunung Batu</a></li>
+            <li><a href="../../muaradua/tanjung-jaya/">Desa Tanjung Jaya</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Desa Pasar Muaradua · Kecamatan Muaradua · OKU Selatan</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
+
